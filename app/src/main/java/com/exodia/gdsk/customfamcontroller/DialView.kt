@@ -71,17 +71,17 @@ class DialView @JvmOverloads constructor(
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
         canvas?.apply {
-            paint.color = if (fanSpeed == FanSpeed.OFF) Color.DKGRAY else Color.GREEN
-            drawCircle((width / 2).toFloat(), (height / 2).toFloat(), radius, paint)
-
-            val indicatorRadius = radius + RADIUS_OFFSET_INDICATOR
-            pointPosition.computeXYForSpeed(fanSpeed, indicatorRadius)
             paint.color = when(fanSpeed){
                 FanSpeed.OFF -> Color.GRAY
                 FanSpeed.LOW -> fanSpeedLowColor
                 FanSpeed.MEDIUM -> fanSpeedMediumColor
                 FanSpeed.HIGH -> fanSpeedMaxColor
             }
+            drawCircle((width / 2).toFloat(), (height / 2).toFloat(), radius, paint)
+
+            val indicatorRadius = radius + RADIUS_OFFSET_INDICATOR
+            pointPosition.computeXYForSpeed(fanSpeed, indicatorRadius)
+            paint.color = Color.BLUE
             drawCircle(pointPosition.x, pointPosition.y, radius / 12, paint)
 
             val labelRadius = radius + RADIUS_OFFSET_LABEL
